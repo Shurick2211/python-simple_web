@@ -4,11 +4,11 @@ import server
 
 web = server.Server()
 
-@web.get("/hello")
+@web.get("/hello", app_type="application/json")
 def hello():
     return "{\"message\":\"Hello, World!\"}"
 
-@web.get("/about")
+@web.get("/about", app_type="application/json")
 def about():
     return "{\"message\":\"This is a simple Python web server\"}"
 

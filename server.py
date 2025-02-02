@@ -14,13 +14,14 @@ class Server:
   def async_start_server(self):
     _thread.start_new_thread(self.start_server, ())
 
-  def get(self, path):
+  def get(self, path, app_type="text/html"):
       """Decorator to register a function for a specific GET path."""
       def decorator(func):
           @wraps(func)
           def wrapper():
               return func()
           self.__routes[path] = wrapper
+          self.__routes[path + 'app_type'] = app_type
           return wrapper
       return decorator
 
@@ -40,9 +41,10 @@ class Server:
       # Check if the path exists in routes
       if path in self.__routes:
           response_body = self.__routes[path]()
-          return f"HTTP/1.1 200 OK\nContent-Type: text/html\n\n{response_body}"
+          response_type = self.__routes[path+'app_type']
+          return f"HTTP/1.1 200 OK\nContent-Type: {response_type}\n\n{response_body}"
       else:
-          return "HTTP/1.1 404 Not Found\nContent-Type: text/html\n\n<h1>404 Not Found</h1>"
+          return "HTTP/1.1 404 Not Found\nContent-Type: application/json\n\n{\"Error\":\"404 Not Found\"}"
 
   def start_server(self):
     # Create a socket
