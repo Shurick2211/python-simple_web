@@ -1,0 +1,4 @@
+It is simple web server in python for 3 endpoints type`s GET by default http://localhost:8085
+- "/" - returned index.html
+- "/about" - return json {"message":"..."}
+- "/hello" - return json {"message":"Hello, World!"}

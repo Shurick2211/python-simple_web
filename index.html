@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Simple Web</title>
+</head>
+<body>
+  <h1>Hello world by Index html</h1>
+  <p>
+    <button onclick="send()">About</button>
+    <div id="message"></div>
+  </p>
+  <p>
+    <button onclick="send_to()">Hello</button>
+    <div id="message_to"></div>
+  </p>
+</body>
+<script>
+  async function send(){
+
+          const response = await fetch("/about", {
+                  method: "GET",
+                  headers: { "Accept": "application/json", "Content-Type": "application/json" },
+              });
+              if (response.ok) {
+                  const data = await response.json();
+                  document.getElementById("message").textContent = data.message;
+              }
+              else
+                  console.log(response);
+      }
+
+    async function send_to(){
+
+          const response = await fetch("/hello", {
+                  method: "GET",
+                  headers: { "Accept": "application/json", "Content-Type": "application/json" },
+              });
+              if (response.ok) {
+                  const data = await response.json();
+                  document.getElementById("message_to").textContent = data.message;
+              }
+              else
+                  console.log(response);
+      }
+</script>
+</html>
