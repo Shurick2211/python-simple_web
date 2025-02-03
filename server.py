@@ -1,5 +1,4 @@
 import socket
-from functools import wraps
 import _thread
 
 class Server:
@@ -18,7 +17,6 @@ class Server:
   def get(self, path, app_type="text/html", paramm=None):
       """Decorator to register a function for a specific GET path."""
       def decorator(func):
-          @wraps(func)
           def wrapper():
             if paramm and len(self.__dict_param)>0:
               in_params =list(map(lambda i: self.__dict_param.get(i), paramm))
