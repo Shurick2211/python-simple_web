@@ -18,7 +18,7 @@
 <script>
   async function send(){
 
-          const response = await fetch("/about", {
+          const response = await fetch("/about?pass=password&login=iam", {
                   method: "GET",
                   headers: { "Accept": "application/json", "Content-Type": "application/json" },
               });
